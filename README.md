@@ -17,8 +17,6 @@
   </a>
 </p>
 
-https://github.com/retchohrips/catppuccin-startpage/assets/preview.mp4
-
 > [NOTE]
 > A live demo can be found [here](https://retchohrips.github.io/catppuccin-startpage)
 
