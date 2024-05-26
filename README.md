@@ -27,10 +27,10 @@ https://github.com/retchohrips/catppuccin-startpage/assets/preview.mp4
 Aesthetic and clean startpage in [**Catppuccin**](https://catppuccin.com/palette) style, hosted on GitHub Pages. This start page is based on the [`dawn`] and [`tartarus-startpage`], which has even more functionality.
 This project is a fork of [`catppuccin-startpage`], with the following improvements:
 
--   12 hour clock option 1e90cb30929a8e7ea60f917ff38c0cdf19b058e2
--   use wttr.in for weather, so that you don't have to manually input your location e7509ed64316c28bf67cee287da744fb19fc2758
-    -   you can still input a location if you need (ex. if using a VPN) c4023a7fb96c7620f100d8340d8afabb0d5e63fd
--   clock link 547043df68c28cf806281f7175dfa9e80b3017eb
+-   12 hour clock option
+-   use wttr.in for weather, so that you don't have to manually input your location
+    -   you can still input a location if you need (ex. if using a VPN)
+-   clock link
 
 ## Usage
 
