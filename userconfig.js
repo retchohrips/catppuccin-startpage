@@ -3,11 +3,10 @@ let saved_config = JSON.parse(localStorage.getItem("CONFIG"));
 const default_config = {
   overrideStorage: true,
   temperature: {
-    location: "London",
-    scale: "C",
+    scale: "F",
   },
   clock: {
-    format: "h:i p",
+    format: "I:M p",
     iconColor: "#f38ba8",
   },
   disabled: [],
