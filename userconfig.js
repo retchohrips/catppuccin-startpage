@@ -8,6 +8,7 @@ const default_config = {
   clock: {
     format: "I:M p",
     iconColor: "#f38ba8",
+    link: "https://calendar.google.com",
   },
   disabled: [],
   fastlink: "https://app.raindrop.io",

@@ -6,6 +6,7 @@ class Statusbar extends Component {
     tabs: "#tabs ul li",
     indicator: ".indicator",
     fastlink: ".fastlink",
+    clock: "current-time",
   };
 
   currentTabIndex = 0;
@@ -206,8 +207,12 @@ class Statusbar extends Component {
 
     document.onkeydown = (e) => this.handleKeyPress(e);
     document.onwheel = (e) => this.handleWheelScroll(e);
+    this.refs.clock.onclick = () => {
+      if (CONFIG.config.clock.link) {
+        window.location.href = CONFIG.config.clock.link;
+      } else window.location.href = "https://calendar.google.com";
+    };
     this.refs.fastlink.onclick = () => {
-      console.log(CONFIG.fastlink);
       if (CONFIG.config.fastlink) {
         window.location.href = CONFIG.config.fastlink;
       }
