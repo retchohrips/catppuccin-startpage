@@ -1,6 +1,10 @@
 class WeatherForecastClient {
-  constructor(tempscale) {
-    this.url = `https://wttr.in/?format=j1`;
+  constructor(tempscale, location) {
+    if (location) {
+      this.url = `https://wttr.in/${location}?format=j1`;
+    } else {
+      this.url = `https://wttr.in/?format=j1`;
+    }
     this.scale = tempscale;
   }
 
