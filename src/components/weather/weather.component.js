@@ -3,6 +3,7 @@ class Weather extends Component {
     temperature: ".weather-temperature-value",
     condition: ".weather-condition-icon",
     scale: ".weather-temperature-scale",
+    location: ".weather-temperature-location",
   };
 
   forecasts = [
@@ -37,8 +38,6 @@ class Weather extends Component {
       color: "cloudy",
     },
   ];
-
-  location;
 
   constructor() {
     super();
@@ -116,7 +115,7 @@ class Weather extends Component {
     return `
         <p class="+ weather-temperature">
             <span class="weather-icon" class="+"><i class="ti weather-condition-icon sunny ti-sun-filled"></i></span>
-            <span class="weather-temperature-location">LOCATIONPLACEHOLDER</span>
+            <span class="weather-temperature-location"></span>
             <span class="weather-temperature-value">1</span>
             º<span class="weather-temperature-scale">${this.temperatureScale}</span>
         </p>`;
@@ -128,7 +127,7 @@ class Weather extends Component {
   }
 
   setTemperature() {
-    const { temperature, condition } = this.weather;
+    const { temperature, condition, location } = this.weather;
     const { icon, color } = this.getForecast(condition);
 
     this.refs.temperature = temperature;
@@ -136,6 +135,7 @@ class Weather extends Component {
     this.refs.condition.classList.add("ti-" + icon);
     this.refs.scale = this.temperatureScale;
     this.refs.condition.classList.add(color);
+    this.refs.location = location;
   }
 
   getForecast(condition) {
