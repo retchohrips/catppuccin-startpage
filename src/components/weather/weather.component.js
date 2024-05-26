@@ -7,23 +7,33 @@ class Weather extends Component {
 
   forecasts = [
     {
-      conditions: ["clouds", "mist", "haze", "smoke"],
-      icon: "cloud_queue",
+      conditions: ["cloudy", "partlycloudy", "verycloudy"],
+      icon: "cloud-filled",
       color: "cloudy",
     },
     {
-      conditions: ["drizzle", "snow", "rain"],
-      icon: "opacity",
+      conditions: ["fog"],
+      icon: "cloud-fog",
       color: "cloudy",
     },
     {
-      conditions: ["clear"],
-      icon: "wb_sunny",
+      conditions: ["heavyrain", "heavyshowers", "lightrain", "lightshowers"],
+      icon: "droplet-filled",
+      color: "cloudy",
+    },
+    {
+      conditions: ["clear", "sunny"],
+      icon: "sun-filled",
       color: "sunny",
     },
     {
-      conditions: ["thunderstorm"],
-      icon: "bolt",
+      conditions: ["thunderyheavyrain", "thunderyshowers", "thunderysnowshowers"],
+      icon: "cloud-storm",
+      color: "cloudy",
+    },
+    {
+      conditions: ["heavysnow", "heavysnowshowers", "lightsnow", "lightsnowshowers"],
+      icon: "snowflake",
       color: "cloudy",
     },
   ];
@@ -42,13 +52,12 @@ class Weather extends Component {
   }
 
   setDependencies() {
-    this.location = CONFIG.temperature.location;
     this.temperatureScale = CONFIG.temperature.scale;
-    this.weatherForecast = new WeatherForecastClient(this.location);
+    this.weatherForecast = new WeatherForecastClient(this.temperatureScale);
   }
 
   imports() {
-    return [this.resources.icons.material, this.resources.fonts.roboto];
+    return [this.resources.icons.tabler, this.resources.fonts.roboto];
   }
 
   style() {
@@ -106,36 +115,11 @@ class Weather extends Component {
   async template() {
     return `
         <p class="+ weather-temperature">
-            <span class="weather-icon" class="+"><i class="material-icons weather-condition-icon sunny">wb_sunny</i></span>
-            <span class="weather-temperature-location">${this.location}</span>
+            <span class="weather-icon" class="+"><i class="ti weather-condition-icon sunny ti-sun-filled"></i></span>
+            <span class="weather-temperature-location">LOCATIONPLACEHOLDER</span>
             <span class="weather-temperature-value">1</span>
             º<span class="weather-temperature-scale">${this.temperatureScale}</span>
         </p>`;
-  }
-
-  toC(f) {
-    return Math.round(((f - 32) * 5) / 9);
-  }
-
-  toF(c) {
-    return Math.round((c * 9) / 5 + 32);
-  }
-
-  swapScale() {
-    this.temperatureScale = this.temperatureScale === "C" ? "F" : "C";
-
-    CONFIG.temperature = {
-      ...CONFIG.temperature,
-      scale: this.temperatureScale,
-    };
-
-    this.setTemperature();
-  }
-
-  convertScale(temperature) {
-    if (this.temperatureScale === "F") return this.toF(temperature);
-
-    return temperature;
   }
 
   async setWeather() {
@@ -147,8 +131,9 @@ class Weather extends Component {
     const { temperature, condition } = this.weather;
     const { icon, color } = this.getForecast(condition);
 
-    this.refs.temperature = this.convertScale(temperature);
-    this.refs.condition = icon;
+    this.refs.temperature = temperature;
+    this.refs.condition.classList.remove("ti-sun-filled");
+    this.refs.condition.classList.add("ti-" + icon);
     this.refs.scale = this.temperatureScale;
     this.refs.condition.classList.add(color);
   }

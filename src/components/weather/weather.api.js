@@ -1,9 +1,7 @@
 class WeatherForecastClient {
-  constructor(location) {
-    this.appId = "50a34e070dd5c09a99554b57ab7ea7e2";
-    this.url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURI(location)}&units=metric&appid=${
-      this.appId
-    }`;
+  constructor(tempscale) {
+    this.url = `https://wttr.in/?format=j1`;
+    this.scale = tempscale;
   }
 
   async getWeather() {
@@ -12,8 +10,8 @@ class WeatherForecastClient {
       .then((json) => JSON.stringify(json))
       .then((json) => JSON.parse(json))
       .then((data) => {
-        const temperature = Math.round(data.main.temp);
-        const condition = data.weather[0].main.toLowerCase();
+        const temperature = parseInt(data.current_condition[0]["temp_" + this.scale]);
+        const condition = data.current_condition[0].weatherDesc[0].value.toLowerCase();
 
         return {
           temperature,
