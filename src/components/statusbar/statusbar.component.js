@@ -6,6 +6,7 @@ class Statusbar extends Component {
     tabs: "#tabs ul li",
     indicator: ".indicator",
     fastlink: ".fastlink",
+    fasticon: ".fastlink-icon",
     clock: "current-time",
   };
 
@@ -196,7 +197,7 @@ class Statusbar extends Component {
         <div id="tabs">
             <cols>
                 <button class="+ fastlink">
-                  <img class="fastlink-icon" src="src/img/pokeball.svg"/>
+                  <i class="fastlink-icon ti ti-${CONFIG.config.fastlink.icon || "link"}"></i>
                 </button>
                 <ul class="- indicator"></ul>
                 <div class="+ widgets col-end">
@@ -218,8 +219,8 @@ class Statusbar extends Component {
       } else window.location.href = "https://calendar.google.com";
     };
     this.refs.fastlink.onclick = () => {
-      if (CONFIG.config.fastlink) {
-        window.location.href = CONFIG.config.fastlink;
+      if (CONFIG.config.fastlink.link) {
+        window.location.href = CONFIG.config.fastlink.link;
       }
     };
 
