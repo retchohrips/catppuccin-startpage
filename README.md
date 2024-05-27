@@ -51,7 +51,7 @@ git clone https://github.com/{YOURUSERNAME}/catppuccin-startpage.git
 > [TIP]
 > You can find icons for your bookmarks using [`tabler-icons`]
 >
-> If you want to reduce the loading time of the icons, you can install the icon [font] locally and activate the option `"localIcons": true` in the config to disable the remote styles
+> If you want to reduce the loading time of the icons, you can install the icon font locally and activate the option `"localIcons": true` in the config to disable the remote styles
 
 ### Available banners
 
@@ -73,4 +73,3 @@ git clone https://github.com/{YOURUSERNAME}/catppuccin-startpage.git
 [`catppuccin-startpage`]: https://github.com/pivoshenko/catppuccin-startpage
 [`userconfig.js`]: userconfig.js
 [`tabler-icons`]: https://tabler.io/icons
-[font]: src/fonts

@@ -24,7 +24,12 @@ class Statusbar extends Component {
   }
 
   imports() {
-    return [this.resources.fonts.roboto, this.resources.icons.material, this.resources.libs.awoo];
+    return [
+      this.resources.fonts.roboto,
+      this.resources.icons.material,
+      this.resources.libs.awoo,
+      this.resources.icons.tabler,
+    ];
   }
 
   style() {

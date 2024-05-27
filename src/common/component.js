@@ -10,9 +10,11 @@ class Component extends HTMLElement {
       raleway: '<link href="https://fonts.googleapis.com/css?family=Raleway:600" rel="stylesheet">',
     },
     icons: {
-      material: '<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">',
+      material:
+        '<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">',
       cryptofont: '<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/monzanifabio/cryptofont/cryptofont.css">',
-      tabler: '<link rel="stylesheet" href="src/css/tabler-icons.min.css">',
+      tabler:
+        '<link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.5.0/dist/tabler-icons.min.css" rel="stylesheet"/>',
     },
     libs: {
       awoo: '<link rel="stylesheet" type="text/css" href="src/css/awoo.min.css">',
@@ -22,12 +24,18 @@ class Component extends HTMLElement {
   constructor() {
     super();
 
-    this.shadow = this.attachShadow({ mode: 'open' });
+    this.shadow = this.attachShadow({ mode: "open" });
   }
 
-  style()    { return null; }
-  template() { return null; }
-  imports()  { return []; }
+  style() {
+    return null;
+  }
+  template() {
+    return null;
+  }
+  imports() {
+    return [];
+  }
 
   /**
    * Reference an external css file
@@ -46,8 +54,7 @@ class Component extends HTMLElement {
   get getResources() {
     const imports = this.imports();
 
-    if (this.resources?.style)
-      imports.push(this.resources.style);
+    if (this.resources?.style) imports.push(this.resources.style);
 
     return imports;
   }
@@ -59,8 +66,7 @@ class Component extends HTMLElement {
   async loadStyles() {
     let html = this.getResources.join("\n");
 
-    if (this.style())
-      html += `<style>${this.style()}</style>`;
+    if (this.style()) html += `<style>${this.style()}</style>`;
 
     return html;
   }
@@ -70,8 +76,7 @@ class Component extends HTMLElement {
    * @returns {string} html
    */
   async buildHTML() {
-    return await this.loadStyles() +
-          await this.template();
+    return (await this.loadStyles()) + (await this.template());
   }
 
   /**
@@ -95,7 +100,7 @@ class Component extends HTMLElement {
       set: (target, prop, value) => {
         this.shadow.querySelector(target[prop]).innerHTML = value;
         return true;
-      }
+      },
     });
   }
 
