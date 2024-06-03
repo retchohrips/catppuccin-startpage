@@ -5,25 +5,37 @@ class WeatherForecastClient {
     } else {
       this.url = `https://wttr.in/?format=j1`;
     }
-    this.scale = tempscale;
+    //// this.scale = tempscale;
+    this.cacheKey = `weatherData-${this.url}-${this.scale}`;
   }
 
   async getWeather() {
-    return await fetch(this.url)
-      .then((res) => res.json())
-      .then((json) => JSON.stringify(json))
-      .then((json) => JSON.parse(json))
-      .then((data) => {
-        const temperature = parseInt(data.current_condition[0]["temp_" + this.scale]);
-        const condition = data.current_condition[0].weatherDesc[0].value.toLowerCase();
-        const location = data.nearest_area[0].areaName[0].value;
+    const cachedData = localStorage.getItem(this.cacheKey);
+    const currentTime = Date.now();
 
-        return {
-          temperature,
-          condition,
-          location,
-        };
-      })
-      .catch((err) => console.warn("Weather API returned an error:", err));
+    // Check if cached data exists and is not older than 1 hour
+    if (cachedData && currentTime - JSON.parse(cachedData).timestamp < 3600000) {
+      return JSON.parse(cachedData);
+    } else {
+      // Fetch data and store in cache
+      // Fetch data from the API
+      const response = await fetch(this.url);
+      const json = await response.json(); // This already parses the response
+
+      // Extract and process the data
+      const temperature = parseInt(json.current_condition[0]["temp_C"]);
+      const condition = json.current_condition[0].weatherDesc[0].value.toLowerCase();
+      const location = json.nearest_area[0].areaName[0].value;
+
+      const data = {
+        temperature,
+        condition,
+        location,
+        timestamp: currentTime,
+      };
+
+      localStorage.setItem(this.cacheKey, JSON.stringify(data));
+      return data;
+    }
   }
 }

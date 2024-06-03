@@ -121,6 +121,30 @@ class Weather extends Component {
         </p>`;
   }
 
+  toC(f) {
+    return Math.round(((f - 32) * 5) / 9);
+  }
+
+  toF(c) {
+    return Math.round((c * 9) / 5 + 32);
+  }
+
+  swapScale() {
+    this.temperatureScale = this.temperatureScale === "C" ? "F" : "C";
+
+    CONFIG.temperature = {
+      ...CONFIG.temperature,
+      scale: this.temperatureScale,
+    };
+    this.setTemperature();
+  }
+
+  convertScale(temperature) {
+    if (this.temperatureScale === "F") return this.toF(temperature);
+
+    return temperature;
+  }
+
   async setWeather() {
     this.weather = await this.weatherForecast.getWeather();
     this.setTemperature();
@@ -130,7 +154,7 @@ class Weather extends Component {
     const { temperature, condition, location } = this.weather;
     const { icon, color } = this.getForecast(condition);
 
-    this.refs.temperature = temperature;
+    this.refs.temperature = this.convertScale(temperature);
     this.refs.condition.classList.remove("ti-sun-filled");
     this.refs.condition.classList.add("ti-" + icon);
     this.refs.scale = this.temperatureScale;
